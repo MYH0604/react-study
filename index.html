@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    src="https://unpkg.com/react@18/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const root = document.getElementById("root");
+    const container = ReactDOM.createRoot(root);
+    function Btn({ text, big }) {
+      return (
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: 10,
+            border: 0,
+            fontSize: big ? 18 : 16,
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+    const App = () => {
+      return (
+        <div>
+          <Btn text="Save Changes" big={true} />
+          <Btn text="Continue" />
+        </div>
+      );
+    };
+    container.render(<App />);
+  </script>
+</html>
