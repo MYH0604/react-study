@@ -12,30 +12,40 @@
     crossorigin
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
     const container = ReactDOM.createRoot(root);
-    function Btn({ text, big }) {
+    function Btn({ text, onClick, fontSize }) {
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             borderRadius: 10,
             border: 0,
-            fontSize: big ? 18 : 16,
+            fontSize,
           }}
         >
           {text}
         </button>
       );
     }
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      onClick: PropTypes.func,
+      fontSize: PropTypes.number,
+    };
+    const MemorizedBtn = React.memo(Btn);
     const App = () => {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" />
+          <Btn text={value} onClick={changeValue} fontSize={18} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     };
